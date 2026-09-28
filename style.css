@@ -1,0 +1,46 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #0f172a;
+    color: #ffffff;
+    text-align: center;
+    padding-top: 30px 10px;
+}
+h1{
+    margin-bottom: 30px;
+}
+.contenedor-tarjetas{
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.tarjetas{
+    background-color: #1e293b;
+    border-radius: 12px;
+    padding: 25px;
+    width: 250px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+    border-top: 6px solid #3b82f6;
+}
+
+.tarjetas.ecg{border-color: #ef4444;}
+.tarjetas.emg{border-color: #10b981;}
+.tarjetas.gsr{border-color: #f59e0b;}
+
+.subtitulo{
+    color: #94a3b8;
+    font-size: 0.85rem;
+    margin-top: -10px;
+}
+
+.valor{
+    font-size: 2.8rem;
+    font-weight: bold;
+    margin: 20px 0 0 0;
+}
+
+.valor small{
+    font-size: 1.1rem;
+    color: #cbd5e1;
+}
