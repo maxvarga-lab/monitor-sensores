@@ -1,34 +1,91 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Monitor biometrivco</title>
+    <title>Monitor Kinesiológico - Ficha del Paciente</title>
     <link rel="stylesheet" href="style.css">
-
 </head>
 <body>
-    <h1>Monitor de sensor Biometricos </h1>
 
-    <div class="contenedor tarjetas">
-        <div class="tarjeta ecg">
-            <h2>ECG</h2>
-            <p class="Subtitulo">Electrocardiograma</p>
-            <p class=" valor"><span id="ecg-val">--</span><small>BMP</small></p>
+    <header class="encabezado">
+        <h1>Centro Kinesiológico</h1>
+        <p>Sistema de Monitoreo Biométrico en Tiempo Real</p>
+    </header>
+
+    <main class="contenedor-principal">
+        
+        <section class="tarjeta ficha-paciente">
+            <h2>Ficha del Paciente</h2>
+            
+            <!-- Formulario de ingreso de datos -->
+            <form id="formulario-paciente">
+                <div class="grupo-formulario">
+                    <label for="nombre">Nombre Completo:</label>
+                    <input type="text" id="nombre" placeholder="Ej: Juan Pérez" required>
+                </div>
+
+                <div class="fila-formulario">
+                    <div class="grupo-formulario">
+                        <label for="rut">RUT:</label>
+                        <input type="text" id="rut" placeholder="Ej: 12.345.678-k" required>
+                    </div>
+
+                    <div class="grupo-formulario">
+                        <label for="edad">Edad:</label>
+                        <input type="number" id="edad" placeholder="Ej: 30" min="1" max="110" required>
+                    </div>
+                </div>
+
+                <div class="fila-formulario">
+                    <div class="grupo-formulario">
+                        <label for="correo">Correo Electrónico:</label>
+                        <input type="email" id="correo" placeholder="ejemplo@paciente.com" required>
+                    </div>
+
+                    <div class="grupo-formulario">
+                        <label for="telefono">Número de Teléfono:</label>
+                        <input type="tel" id="telefono" placeholder="9 1234 5678" required>
+                    </div>
+                </div>
+
+                <button type="submit" id="btn-guardar">Iniciar Evaluación Kinesiológica</button>
+            </form>
+
+            <!-- Resumen del paciente activo -->
+            <div id="resumen-paciente" class="resumen-paciente oculto">
+                <h3>Paciente en Evaluación</h3>
+                <p><strong>Nombre:</strong> <span id="resumen-nombre">-</span></p>
+                <p><strong>RUT:</strong> <span id="resumen-rut">-</span> | <strong>Edad:</strong> <span id="resumen-edad">-</span> años</p>
+                <p><strong>Contacto:</strong> <span id="resumen-correo">-</span> | <span id="resumen-telefono">-</span></p>
+                <button id="btn-editar" class="btn-secundario">Editar Ficha del Paciente</button>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 2: MONITOREO BIOMÉTRICO EN TIEMPO REAL -->
+        <section class="cuadrícula-sensores">
+            
+            <div class="tarjeta-sensor ecg">
+                <div class="encabezado-sensor">
+                    <h3>ECG (Electrocardiograma)</h3>
+                    <span class="unidad">mV</span>
+                </div>
+                <div class="valor-sensor" id="ecg-val">--</div>
+                <p class="descripcion-sensor">Frecuencia / Actividad cardíaca</p>
             </div>
 
-        <div class="tarjeta emg">
-            <h2>EMG</h2>
-            <p class="Subtitulo">Electromiografia</p>
-            <p class="valor"><span id="emg-val">--</span><small>μV</small></p>
-        </div>
-        <div class="tarjeta gsr">
-            <h2>GSR</h2>
-            <p class=" Subtitulo">Respuesta Galvanica</p>
-            <p class="valor"><span id="gsr-val">--</span><small>μS</small></p>
-        </div>
-    </div>
+            <div class="tarjeta-sensor emg">
+                <div class="encabezado-sensor">
+                    <h3>EMG (Electromiografía)</h3>
+                    <span class="unidad">mV</span>
+                </div>
+                <div class="valor-sensor" id="emg-val">--</div>
+                <p class="descripcion-sensor">Actividad muscular</p>
+            </div>
 
-    <script type="module" src="script.js"> </script>
+        </section>
+    </main>
+
+    <script type="module" src="script.js"></script>
 </body>
 </html>

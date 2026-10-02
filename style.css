@@ -1,46 +1,186 @@
+/* REGLAS GENERALES Y ESTILOS DE BASE */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
 body {
-    font-family: Arial, sans-serif;
-    background-color: #0f172a;
+    background-color: #f4f7f6;
+    color: #333333;
+    line-height: 1.6;
+}
+
+/* ENCABEZADO DE LA PÁGINA */
+.encabezado {
+    background: linear-gradient(135deg, #0077b6, #00b4d8);
     color: #ffffff;
     text-align: center;
-    padding-top: 30px 10px;
-}
-h1{
-    margin-bottom: 30px;
-}
-.contenedor-tarjetas{
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    flex-wrap: wrap;
+    padding: 2rem 1rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.tarjetas{
-    background-color: #1e293b;
+.encabezado h1 {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+/* CONTENEDOR PRINCIPAL */
+.contenedor-principal {
+    max-width: 1000px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+/* TARJETA DE LA FICHA DEL PACIENTE */
+.tarjeta {
+    background: #ffffff;
+    padding: 2rem;
     border-radius: 12px;
-    padding: 25px;
-    width: 250px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
-    border-top: 6px solid #3b82f6;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    margin-bottom: 2rem;
 }
 
-.tarjetas.ecg{border-color: #ef4444;}
-.tarjetas.emg{border-color: #10b981;}
-.tarjetas.gsr{border-color: #f59e0b;}
-
-.subtitulo{
-    color: #94a3b8;
-    font-size: 0.85rem;
-    margin-top: -10px;
+.ficha-paciente h2 {
+    color: #0077b6;
+    margin-bottom: 1.5rem;
+    border-bottom: 2px solid #e0e0e0;
+    padding-bottom: 0.5rem;
 }
 
-.valor{
-    font-size: 2.8rem;
+.grupo-formulario {
+    margin-bottom: 1.2rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.fila-formulario {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+label {
+    font-weight: 600;
+    margin-bottom: 0.4rem;
+    font-size: 0.9rem;
+    color: #555555;
+}
+
+input {
+    padding: 0.8rem;
+    border: 1px solid #cccccc;
+    border-radius: 6px;
+    font-size: 1rem;
+    transition: border-color 0.3s;
+}
+
+input:focus {
+    outline: none;
+    border-color: #0077b6;
+}
+
+/* BOTONES */
+button {
+    background-color: #0077b6;
+    color: #ffffff;
+    border: none;
+    padding: 0.9rem 1.5rem;
+    font-size: 1rem;
     font-weight: bold;
-    margin: 20px 0 0 0;
+    border-radius: 6px;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 1rem;
+    transition: background-color 0.3s;
 }
 
-.valor small{
+button:hover {
+    background-color: #005f8b;
+}
+
+.btn-secundario {
+    background-color: #6c757d;
+    margin-top: 1rem;
+}
+
+.btn-secundario:hover {
+    background-color: #5a6268;
+}
+
+/* RESUMEN DEL PACIENTE */
+.resumen-paciente {
+    background-color: #eef9ff;
+    border-left: 4px solid #0077b6;
+    padding: 1.2rem;
+    border-radius: 6px;
+}
+
+.resumen-paciente h3 {
+    color: #0077b6;
+    margin-bottom: 0.5rem;
+}
+
+.oculto {
+    display: none;
+}
+
+/* CUADRÍCULA DE TARJETAS DE SENSORES */
+.cuadrícula-sensores {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+}
+
+.tarjeta-sensor {
+    background: #ffffff;
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    text-align: center;
+    border-top: 5px solid #0077b6;
+}
+
+.tarjeta-sensor.ecg { border-color: #e63946; }
+.tarjeta-sensor.emg { border-color: #2a9d8f; }
+.tarjeta-sensor.gsr { border-color: #e76f51; }
+
+.encabezado-sensor {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.encabezado-sensor h3 {
     font-size: 1.1rem;
-    color: #cbd5e1;
+    color: #444444;
+}
+
+.unidad {
+    background: #f0f0f0;
+    padding: 0.2rem 0.6rem;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    font-weight: bold;
+}
+
+.valor-sensor {
+    font-size: 3rem;
+    font-weight: bold;
+    color: #1d3557;
+    margin: 1rem 0;
+}
+
+.descripcion-sensor {
+    font-size: 0.85rem;
+    color: #777777;
+}
+
+/* ADAPTACIÓN A PANTALLAS PEQUEÑAS (MÓVILES) */
+@media (max-width: 600px) {
+    .fila-formulario {
+        grid-template-columns: 1fr;
+    }
 }

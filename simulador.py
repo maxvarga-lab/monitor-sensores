@@ -8,11 +8,9 @@ FIREBASE_URL = "https://datos-sensores-5df32-default-rtdb.firebaseio.com/sensore
 print("Enviando datos a tu Firebase... Presiona Ctrl+C para detener.")
 
 while True:
-    # Simula valores de temperatura y humedad aleatorios
     datos = {
         "ecg": random.randint(65,95),
         "emg": round(random.uniform(15.0, 188.0),1),
-        "gsr": round(random.uniform(2.5, 12.0),2)
     }
     
     try:
@@ -26,4 +24,4 @@ while True:
     except Exception as e:
         print(f"Error de conexión: {e}")
         
-    time.sleep(2)  # Envía datos nuevos cada 2 segundos 
+    time.sleep(2)  

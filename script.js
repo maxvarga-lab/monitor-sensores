@@ -1,6 +1,7 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
+import { getDatabase, ref, onValue, set } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
 
+// Credenciales de configuración de Firebase
 const firebaseConfig = {
   apiKey: "AIzaSyBGFDeHTy-0mz4LSX9g0Gr4NdYODKOr-nI",
   authDomain: "datos-sensores-5df32.firebaseapp.com",
@@ -12,19 +13,68 @@ const firebaseConfig = {
   measurementId: "G-065H36DNBY"
 };
 
-// Inicializar Firebase
+// Inicialización de la aplicación y la base de datos
 const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
 
-// Referencia al nodo de los sensores
-const sensorRef = ref(database, 'sensores');
+// Referencias a los nodos dentro de Firebase
+const referenciaSensores = ref(database, 'sensores');
+const referenciaPaciente = ref(database, 'paciente_actual');
 
-// Escuchar lecturas en tiempo real
-onValue(sensorRef, (snapshot) => {
-    const data = snapshot.val();
-    if (data) {
-        if (data.ecg !== undefined) document.getElementById('ecg-val').textContent = data.ecg;
-        if (data.emg !== undefined) document.getElementById('emg-val').textContent = data.emg;
-        if (data.gsr !== undefined) document.getElementById('gsr-val').textContent = data.gsr;
+// Elementos de la interfaz web
+const formularioPaciente = document.getElementById('formulario-paciente');
+const resumenPaciente = document.getElementById('resumen-paciente');
+const btnEditar = document.getElementById('btn-editar');
+
+// guardar formulario en firebase
+formularioPaciente.addEventListener('submit', (evento) => {
+    evento.preventDefault();
+
+    const datosPaciente = {
+        nombre: document.getElementById('nombre').value,
+        rut: document.getElementById('rut').value,
+        edad: document.getElementById('edad').value,
+        correo: document.getElementById('correo').value,
+        telefono: document.getElementById('telefono').value,
+        fechaEvaluacion: new Date().toLocaleString('es-CL')
+    };
+
+    set(referenciaPaciente, datosPaciente)
+        .then(() => {
+            alert("Ficha del paciente guardada exitosamente.");
+        })
+        .catch((error) => {
+            console.error("Error al guardar la ficha del paciente:", error);
+            alert("Ocurrió un error al guardar los datos.");
+        });
+});
+
+// boton editar
+btnEditar.addEventListener('click', () => {
+    formularioPaciente.classList.remove('oculto');
+    resumenPaciente.classList.add('oculto');
+});
+
+// ecuchar los cambios del paciente en tiempo real 
+onValue(referenciaPaciente, (snapshot) => {
+    const paciente = snapshot.val();
+    if (paciente) {
+        document.getElementById('resumen-nombre').textContent = paciente.nombre;
+        document.getElementById('resumen-rut').textContent = paciente.rut;
+        document.getElementById('resumen-edad').textContent = paciente.edad;
+        document.getElementById('resumen-correo').textContent = paciente.correo;
+        document.getElementById('resumen-telefono').textContent = paciente.telefono;
+
+        formularioPaciente.classList.add('oculto');
+        resumenPaciente.classList.remove('oculto');
+    }
+});
+
+// ecuchar en tiempo real sensores
+onValue(referenciaSensores, (snapshot) => {
+    const datos = snapshot.val();
+    if (datos) {
+        if (datos.ecg !== undefined) document.getElementById('ecg-val').textContent = datos.ecg;
+        if (datos.emg !== undefined) document.getElementById('emg-val').textContent = datos.emg;
     }
 });
