@@ -1,4 +1,3 @@
-/* REGLAS GENERALES Y ESTILOS DE BASE */
 * {
     box-sizing: border-box;
     margin: 0;
@@ -8,22 +7,55 @@
 
 body {
     background-color: #f4f7f6;
-    color: #333333;
+    color: #333;
     line-height: 1.6;
 }
 
-/* ENCABEZADO DE LA PÁGINA */
+/* ENCABEZADO */
 .encabezado {
     background: linear-gradient(135deg, #0077b6, #00b4d8);
-    color: #ffffff;
+    color: white;
     text-align: center;
-    padding: 2rem 1rem;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 2rem 1rem 1.5rem 1rem;
 }
 
 .encabezado h1 {
     font-size: 2rem;
     margin-bottom: 0.5rem;
+}
+
+/* MENÚ DE PESTAÑAS (APARTADOS) */
+.navegacion-pestanas {
+    display: flex;
+    justify-content: center;
+    background-color: #005f8b;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.btn-pestana {
+    background: transparent;
+    color: #d1ecf1;
+    border: none;
+    padding: 1rem 2rem;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    border-bottom: 4px solid transparent;
+    transition: all 0.3s ease;
+    width: auto;
+    margin-top: 0;
+    border-radius: 0;
+}
+
+.btn-pestana:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
+}
+
+.btn-pestana.activa {
+    color: white;
+    border-bottom-color: #00b4d8;
+    background-color: rgba(255, 255, 255, 0.15);
 }
 
 /* CONTENEDOR PRINCIPAL */
@@ -33,16 +65,15 @@ body {
     padding: 0 1rem;
 }
 
-/* TARJETA DE LA FICHA DEL PACIENTE */
 .tarjeta {
-    background: #ffffff;
+    background: white;
     padding: 2rem;
     border-radius: 12px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
     margin-bottom: 2rem;
 }
 
-.ficha-paciente h2 {
+.ficha-paciente h2, .autoevaluacion-card h2 {
     color: #0077b6;
     margin-bottom: 1.5rem;
     border-bottom: 2px solid #e0e0e0;
@@ -65,12 +96,12 @@ label {
     font-weight: 600;
     margin-bottom: 0.4rem;
     font-size: 0.9rem;
-    color: #555555;
+    color: #555;
 }
 
 input {
     padding: 0.8rem;
-    border: 1px solid #cccccc;
+    border: 1px solid #ccc;
     border-radius: 6px;
     font-size: 1rem;
     transition: border-color 0.3s;
@@ -81,10 +112,9 @@ input:focus {
     border-color: #0077b6;
 }
 
-/* BOTONES */
 button {
     background-color: #0077b6;
-    color: #ffffff;
+    color: white;
     border: none;
     padding: 0.9rem 1.5rem;
     font-size: 1rem;
@@ -109,7 +139,6 @@ button:hover {
     background-color: #5a6268;
 }
 
-/* RESUMEN DEL PACIENTE */
 .resumen-paciente {
     background-color: #eef9ff;
     border-left: 4px solid #0077b6;
@@ -123,10 +152,10 @@ button:hover {
 }
 
 .oculto {
-    display: none;
+    display: none !important;
 }
 
-/* CUADRÍCULA DE TARJETAS DE SENSORES */
+/* GRILLA DE SENSORES */
 .cuadrícula-sensores {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -134,7 +163,7 @@ button:hover {
 }
 
 .tarjeta-sensor {
-    background: #ffffff;
+    background: white;
     padding: 1.5rem;
     border-radius: 12px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
@@ -144,7 +173,6 @@ button:hover {
 
 .tarjeta-sensor.ecg { border-color: #e63946; }
 .tarjeta-sensor.emg { border-color: #2a9d8f; }
-.tarjeta-sensor.gsr { border-color: #e76f51; }
 
 .encabezado-sensor {
     display: flex;
@@ -155,7 +183,7 @@ button:hover {
 
 .encabezado-sensor h3 {
     font-size: 1.1rem;
-    color: #444444;
+    color: #444;
 }
 
 .unidad {
@@ -175,12 +203,84 @@ button:hover {
 
 .descripcion-sensor {
     font-size: 0.85rem;
-    color: #777777;
+    color: #777;
 }
 
-/* ADAPTACIÓN A PANTALLAS PEQUEÑAS (MÓVILES) */
+/* AUTOEVALUACIÓN Y SLIDER */
+.escala-dolor {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.75rem;
+    color: #777;
+    margin-top: 0.3rem;
+}
+
+#valor-dolor-display {
+    color: #0077b6;
+    font-size: 1.2rem;
+}
+
+input[type="range"] {
+    width: 100%;
+    cursor: pointer;
+    accent-color: #0077b6;
+    margin-top: 0.4rem;
+}
+
+.historial-dolor {
+    margin-top: 2rem;
+    border-top: 2px solid #e0e0e0;
+    padding-top: 1rem;
+}
+
+.historial-dolor h3 {
+    color: #0077b6;
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+}
+
+.lista-registros {
+    list-style: none;
+    max-height: 250px;
+    overflow-y: auto;
+}
+
+.item-registro {
+    background-color: #f8f9fa;
+    border-left: 5px solid #2a9d8f;
+    padding: 0.8rem 1rem;
+    margin-bottom: 0.6rem;
+    border-radius: 6px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.item-registro.medio { border-left-color: #e76f51; }
+.item-registro.alto { border-left-color: #e63946; }
+
+.badge-dolor {
+    background: #2a9d8f;
+    color: white;
+    font-weight: bold;
+    padding: 0.3rem 0.7rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    white-space: nowrap;
+}
+
+.badge-dolor.medio { background: #e76f51; }
+.badge-dolor.alto { background: #e63946; }
+
 @media (max-width: 600px) {
     .fila-formulario {
         grid-template-columns: 1fr;
+    }
+    .navegacion-pestanas {
+        flex-direction: column;
+    }
+    .btn-pestana {
+        width: 100%;
+        text-align: center;
     }
 }
