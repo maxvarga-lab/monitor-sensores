@@ -1,286 +1,461 @@
+:root {
+    --bg-main: #f0f2f5;
+    --card-bg: #ffffff;
+    --primary-blue: #0284c7;
+    --dark-blue: #0369a1;
+    --teal-main: #0d9488;
+    --teal-hover: #0f766e;
+    --gray-btn: #64748b;
+    --border-color: #e2e8f0;
+    --text-dark: #1e293b;
+    --text-muted: #64748b;
+}
+
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
 
 body {
-    background-color: #f4f7f6;
-    color: #333;
-    line-height: 1.6;
+    background-color: var(--bg-main);
+    color: var(--text-dark);
+    padding-bottom: 3rem;
 }
 
 /* ENCABEZADO */
-.encabezado {
-    background: linear-gradient(135deg, #0077b6, #00b4d8);
-    color: white;
-    text-align: center;
-    padding: 2rem 1rem 1.5rem 1rem;
-}
-
-.encabezado h1 {
-    font-size: 2rem;
-    margin-bottom: 0.5rem;
-}
-
-/* MENÚ DE PESTAÑAS (APARTADOS) */
-.navegacion-pestanas {
+.encabezado-superior {
+    max-width: 1100px;
+    margin: 1.5rem auto 1rem auto;
     display: flex;
-    justify-content: center;
-    background-color: #005f8b;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-.btn-pestana {
-    background: transparent;
-    color: #d1ecf1;
-    border: none;
-    padding: 1rem 2rem;
-    font-size: 1rem;
-    font-weight: bold;
-    cursor: pointer;
-    border-bottom: 4px solid transparent;
-    transition: all 0.3s ease;
-    width: auto;
-    margin-top: 0;
-    border-radius: 0;
-}
-
-.btn-pestana:hover {
-    background-color: rgba(255, 255, 255, 0.1);
-    color: white;
-}
-
-.btn-pestana.activa {
-    color: white;
-    border-bottom-color: #00b4d8;
-    background-color: rgba(255, 255, 255, 0.15);
-}
-
-/* CONTENEDOR PRINCIPAL */
-.contenedor-principal {
-    max-width: 1000px;
-    margin: 2rem auto;
+    justify-content: space-between;
+    align-items: center;
     padding: 0 1rem;
 }
 
-.tarjeta {
-    background: white;
-    padding: 2rem;
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-    margin-bottom: 2rem;
+.encabezado-superior h1 {
+    font-size: 1.8rem;
+    color: #0f172a;
+    font-weight: 700;
 }
 
-.ficha-paciente h2, .autoevaluacion-card h2 {
-    color: #0077b6;
-    margin-bottom: 1.5rem;
-    border-bottom: 2px solid #e0e0e0;
-    padding-bottom: 0.5rem;
+.badge-boceto {
+    background-color: #fef08a;
+    color: #854d0e;
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 0.2rem 0.6rem;
+    border-radius: 4px;
 }
 
-.grupo-formulario {
-    margin-bottom: 1.2rem;
+/* CONTENEDOR */
+.contenedor-pantalla {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 1rem;
     display: flex;
     flex-direction: column;
-}
-
-.fila-formulario {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1rem;
-}
-
-label {
-    font-weight: 600;
-    margin-bottom: 0.4rem;
-    font-size: 0.9rem;
-    color: #555;
-}
-
-input {
-    padding: 0.8rem;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    font-size: 1rem;
-    transition: border-color 0.3s;
-}
-
-input:focus {
-    outline: none;
-    border-color: #0077b6;
-}
-
-button {
-    background-color: #0077b6;
-    color: white;
-    border: none;
-    padding: 0.9rem 1.5rem;
-    font-size: 1rem;
-    font-weight: bold;
-    border-radius: 6px;
-    cursor: pointer;
-    width: 100%;
-    margin-top: 1rem;
-    transition: background-color 0.3s;
-}
-
-button:hover {
-    background-color: #005f8b;
-}
-
-.btn-secundario {
-    background-color: #6c757d;
-    margin-top: 1rem;
-}
-
-.btn-secundario:hover {
-    background-color: #5a6268;
-}
-
-.resumen-paciente {
-    background-color: #eef9ff;
-    border-left: 4px solid #0077b6;
-    padding: 1.2rem;
-    border-radius: 6px;
-}
-
-.resumen-paciente h3 {
-    color: #0077b6;
-    margin-bottom: 0.5rem;
-}
-
-.oculto {
-    display: none !important;
-}
-
-/* GRILLA DE SENSORES */
-.cuadrícula-sensores {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 1.5rem;
 }
 
-.tarjeta-sensor {
-    background: white;
-    padding: 1.5rem;
+/* TARJETAS GENERALES */
+.tarjeta-seccion {
+    background: var(--card-bg);
     border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-    text-align: center;
-    border-top: 5px solid #0077b6;
+    padding: 1.5rem;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    border: 1px solid var(--border-color);
 }
 
-.tarjeta-sensor.ecg { border-color: #e63946; }
-.tarjeta-sensor.emg { border-color: #2a9d8f; }
-
-.encabezado-sensor {
+.seccion-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 1rem;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 0.8rem;
+    margin-bottom: 1.2rem;
 }
 
-.encabezado-sensor h3 {
-    font-size: 1.1rem;
-    color: #444;
+.seccion-header h2 {
+    font-size: 1.25rem;
+    color: #0f172a;
 }
 
-.unidad {
-    background: #f0f0f0;
-    padding: 0.2rem 0.6rem;
+.badge-paciente-resumen, .badge-subtit {
+    background: #f1f5f9;
+    color: var(--text-muted);
+    font-size: 0.82rem;
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    font-weight: 500;
+}
+
+/* 1. MÉTRICAS SUPERIORES */
+.grid-metricas {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+}
+
+.tarjeta-metrica {
+    background: var(--card-bg);
+    border-radius: 12px;
+    padding: 1.2rem;
+    border: 1px solid var(--border-color);
+    text-align: center;
+}
+
+.tarjeta-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.tarjeta-header h3 {
+    font-size: 0.95rem;
+    color: var(--text-dark);
+}
+
+.badge-unidad {
+    background: #f1f5f9;
+    font-size: 0.75rem;
+    padding: 0.1rem 0.4rem;
     border-radius: 4px;
-    font-size: 0.8rem;
     font-weight: bold;
 }
 
-.valor-sensor {
+.valor-metrica {
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: #0f172a;
+    margin: 0.2rem 0;
+}
+
+.valor-metrica.grande {
     font-size: 3rem;
-    font-weight: bold;
-    color: #1d3557;
+    color: #0f172a;
     margin: 1rem 0;
 }
 
-.descripcion-sensor {
-    font-size: 0.85rem;
-    color: #777;
+.grafico-onda svg {
+    width: 100%;
+    height: 35px;
 }
 
-/* AUTOEVALUACIÓN Y SLIDER */
-.escala-dolor {
+.subtexto-metrica {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
+
+/* 2. FORMULARIO PACIENTE */
+.formulario-paciente {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.fila-inputs {
+    display: grid;
+    gap: 1rem;
+}
+
+.col-3 { grid-template-columns: repeat(3, 1fr); }
+.col-2 { grid-template-columns: repeat(2, 1fr); }
+
+.campo {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+}
+
+.campo label {
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--text-dark);
+}
+
+.campo input, .campo textarea {
+    padding: 0.6rem 0.8rem;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    font-size: 0.9rem;
+}
+
+.selector-pills {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.pill {
+    padding: 0.4rem 1rem;
+    border: 1px solid #cbd5e1;
+    background: white;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.85rem;
+}
+
+.pill.activa {
+    background-color: var(--primary-blue);
+    color: white;
+    border-color: var(--primary-blue);
+}
+
+.btn-gris-ancho {
+    background-color: #475569;
+    color: white;
+    padding: 0.8rem;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 0.5rem;
+}
+
+/* 3. REGISTRO DE DOLOR Y ESCALA */
+.toggle-tiempo {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1.2rem;
+}
+
+.btn-toggle {
+    padding: 0.4rem 1rem;
+    border: 1px solid #cbd5e1;
+    background: white;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    cursor: pointer;
+}
+
+.btn-toggle.activo {
+    border-color: #e63946;
+    color: #e63946;
+    font-weight: bold;
+    background: #fff5f5;
+}
+
+.barra-niveles-dolor {
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    gap: 0.3rem;
+    margin: 0.5rem 0;
+}
+
+.btn-nivel {
+    padding: 0.8rem 0;
+    border: none;
+    color: white;
+    font-weight: bold;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+/* Colores Escala 1-10 */
+.niv-1, .niv-2 { background-color: #2a9d8f; }
+.niv-3, .niv-4 { background-color: #e9c46a; color: #333; }
+.niv-5, .niv-6 { background-color: #f4a261; }
+.niv-7, .niv-8 { background-color: #e76f51; }
+.niv-9, .niv-10 { background-color: #b71c1c; }
+
+.btn-nivel.seleccionado {
+    outline: 3px solid #0f172a;
+    transform: scale(1.05);
+}
+
+.leyenda-escala {
     display: flex;
     justify-content: space-between;
     font-size: 0.75rem;
-    color: #777;
-    margin-top: 0.3rem;
+    color: var(--text-muted);
+    margin-bottom: 1.5rem;
 }
 
-#valor-dolor-display {
-    color: #0077b6;
-    font-size: 1.2rem;
+/* MANIQUÍ */
+.grid-maniqui-panel {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
 }
 
-input[type="range"] {
-    width: 100%;
+.area-maniquies {
+    display: flex;
+    justify-content: space-around;
+    background: #f8fafc;
+    padding: 1rem;
+    border-radius: 10px;
+    border: 1px solid var(--border-color);
+}
+
+.vista-cuerpo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
+
+.svg-maniqui {
+    width: 140px;
+    height: 280px;
+}
+
+.zona-musculo {
+    fill: #e2e8f0;
+    stroke: #94a3b8;
+    stroke-width: 1.5;
     cursor: pointer;
-    accent-color: #0077b6;
-    margin-top: 0.4rem;
+    transition: all 0.2s;
 }
 
-.historial-dolor {
-    margin-top: 2rem;
-    border-top: 2px solid #e0e0e0;
-    padding-top: 1rem;
+.zona-musculo:hover {
+    fill: #cbd5e1;
 }
 
-.historial-dolor h3 {
-    color: #0077b6;
-    font-size: 1.1rem;
-    margin-bottom: 1rem;
+.panel-zonas-registradas {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
 }
 
-.lista-registros {
+.lista-zonas-activas {
     list-style: none;
-    max-height: 250px;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    max-height: 160px;
     overflow-y: auto;
 }
 
-.item-registro {
-    background-color: #f8f9fa;
-    border-left: 5px solid #2a9d8f;
-    padding: 0.8rem 1rem;
-    margin-bottom: 0.6rem;
-    border-radius: 6px;
+.item-zona-marcada {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    font-size: 0.88rem;
+    border-bottom: 1px dashed var(--border-color);
+    padding-bottom: 0.4rem;
 }
 
-.item-registro.medio { border-left-color: #e76f51; }
-.item-registro.alto { border-left-color: #e63946; }
+.badge-tipo-chico {
+    font-size: 0.7rem;
+    padding: 0.1rem 0.4rem;
+    border-radius: 4px;
+    background: #fee2e2;
+    color: #991b1b;
+}
 
-.badge-dolor {
-    background: #2a9d8f;
+.instruccion-click {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+}
+
+.btn-verde-principal {
+    background-color: var(--teal-main);
+    color: white;
+    padding: 0.8rem;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.btn-verde-principal:hover { background-color: var(--teal-hover); }
+
+.btn-outline-limpiar {
+    background: transparent;
+    border: 1px dashed #cbd5e1;
+    padding: 0.6rem;
+    border-radius: 8px;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    cursor: pointer;
+}
+
+/* 4. HISTORIAL Y TABLA */
+.nota-historial {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    margin-bottom: 1rem;
+}
+
+.tabla-historial {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.88rem;
+}
+
+.tabla-historial th, .tabla-historial td {
+    padding: 0.75rem;
+    text-align: left;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.tabla-historial th {
+    color: var(--text-muted);
+    font-weight: 600;
+}
+
+.badge-dolor-tabla {
+    padding: 0.2rem 0.6rem;
+    border-radius: 12px;
     color: white;
     font-weight: bold;
-    padding: 0.3rem 0.7rem;
-    border-radius: 20px;
-    font-size: 0.85rem;
-    white-space: nowrap;
+    font-size: 0.8rem;
 }
 
-.badge-dolor.medio { background: #e76f51; }
-.badge-dolor.alto { background: #e63946; }
+.grid-grafico-resumen {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+    align-items: center;
+}
 
-@media (max-width: 600px) {
-    .fila-formulario {
+.box-grafico h4 {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    margin-bottom: 0.5rem;
+}
+
+.box-metricas-resumen {
+    font-size: 0.9rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.acciones-sesion-footer {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.btn-azul-full {
+    background-color: var(--primary-blue);
+    color: white;
+    padding: 0.9rem;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.btn-outline-full {
+    background: transparent;
+    border: 1px solid #cbd5e1;
+    padding: 0.9rem;
+    border-radius: 8px;
+    font-weight: bold;
+    color: var(--text-dark);
+    cursor: pointer;
+}
+
+@media (max-width: 768px) {
+    .grid-metricas, .col-3, .col-2, .grid-maniqui-panel, .grid-grafico-resumen, .acciones-sesion-footer {
         grid-template-columns: 1fr;
-    }
-    .navegacion-pestanas {
-        flex-direction: column;
-    }
-    .btn-pestana {
-        width: 100%;
-        text-align: center;
     }
 }

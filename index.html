@@ -3,134 +3,282 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Monitor Kinesiológico - Ficha del Paciente</title>
+    <title>Ficha del Paciente - Centro Kinesiológico</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <header class="encabezado">
-        <h1>Centro Kinesiológico</h1>
-        <p>Sistema de Monitoreo Biométrico en Tiempo Real</p>
+    <!-- ENCABEZADO SUPERIOR -->
+    <header class="encabezado-superior">
+        <h1>Ficha del Paciente</h1>
     </header>
 
-    <nav class="navegacion-pestanas">
-        <button id="tab-monitoreo" class="btn-pestana activa">Monitoreo Clínico</button>
-        <button id="tab-autoevaluacion" class="btn-pestana">Autoevaluación de Dolor</button>
-    </nav>
+    <main class="contenedor-pantalla">
 
-    <main class="contenedor-principal">
-        
-        <div id="seccion-monitoreo" class="vista-seccion">
-            
-            <!-- Ficha del paciente-->
-            <section class="tarjeta ficha-paciente">
-                <h2>Ficha del Paciente</h2>
-                
-                <form id="formulario-paciente">
-                    <div class="grupo-formulario">
-                        <label for="nombre">Nombre Completo:</label>
-                        <input type="text" id="nombre" placeholder="Ej: Juan Pérez" required>
-                    </div>
-
-                    <div class="fila-formulario">
-                        <div class="grupo-formulario">
-                            <label for="rut">RUT:</label>
-                            <input type="text" id="rut" placeholder="Ej: 12.345.678-K" required>
-                        </div>
-
-                        <div class="grupo-formulario">
-                            <label for="edad">Edad:</label>
-                            <input type="number" id="edad" placeholder="Ej: 30" min="1" max="167" required>
-                        </div>
-                    </div>
-
-                    <div class="fila-formulario">
-                        <div class="grupo-formulario">
-                            <label for="correo">Correo Electrónico:</label>
-                            <input type="email" id="correo" placeholder="ejemplo@paciente.com" required>
-                        </div>
-
-                        <div class="grupo-formulario">
-                            <label for="telefono">Número de Teléfono:</label>
-                            <input type="tel" id="telefono" placeholder="9 1234 5678" required>
-                        </div>
-                    </div>
-
-                    <button type="submit" id="btn-guardar">Iniciar Evaluación Kinesiológica</button>
-                </form>
-
-                <div id="resumen-paciente" class="resumen-paciente oculto">
-                    <h3>Paciente en Evaluación</h3>
-                    <p><strong>Nombre:</strong> <span id="resumen-nombre">-</span></p>
-                    <p><strong>RUT:</strong> <span id="resumen-rut">-</span> | <strong>Edad:</strong> <span id="resumen-edad">-</span> años</p>
-                    <p><strong>Contacto:</strong> <span id="resumen-correo">-</span> | <span id="resumen-telefono">-</span></p>
-                    <button id="btn-editar" class="btn-secundario">Editar Ficha del Paciente</button>
+        <!-- SECCIÓN 1: METRICAS SUPERIORES (ECG, EMG, DOLOR) -->
+        <section class="grid-metricas">
+            <!-- TARJETA ECG -->
+            <div class="tarjeta-metrica">
+                <div class="tarjeta-header">
+                    <h3>ECG (Electrocardiograma)</h3>
+                    <span class="badge-unidad">mV</span>
                 </div>
-            </section>
+                <div class="valor-metrica" id="ecg-val">7905.1</div>
+                <div class="grafico-onda ecg-onda">
+                    <svg viewBox="0 0 200 40">
+                        <path d="M 0 20 L 40 20 L 45 10 L 50 30 L 55 5 L 60 35 L 65 20 L 200 20" fill="none" stroke="#e63946" stroke-width="2"/>
+                    </svg>
+                </div>
+                <p class="subtexto-metrica">Frecuencia / Actividad cardíaca</p>
+            </div>
 
-            <!-- monitoreo de sensores -->
-            <section class="cuadrícula-sensores">
-                <div class="tarjeta-sensor ecg">
-                    <div class="encabezado-sensor">
-                        <h3>ECG (Electrocardiograma)</h3>
-                        <span class="unidad">mV</span>
+            <!-- TARJETA EMG -->
+            <div class="tarjeta-metrica">
+                <div class="tarjeta-header">
+                    <h3>EMG (Electromiografía)</h3>
+                    <span class="badge-unidad">mV</span>
+                </div>
+                <div class="valor-metrica" id="emg-val">4277.8</div>
+                <div class="grafico-onda emg-onda">
+                    <svg viewBox="0 0 200 40">
+                        <path d="M 0 20 Q 10 5, 20 20 T 40 20 T 60 20 T 80 20 T 100 20 T 120 20 T 140 20 T 160 20 T 180 20 T 200 20" fill="none" stroke="#2a9d8f" stroke-width="2"/>
+                    </svg>
+                </div>
+                <p class="subtexto-metrica">Actividad muscular</p>
+            </div>
+
+            <!-- TARJETA DOLOR REPORTADO -->
+            <div class="tarjeta-metrica destacada-dolor">
+                <div class="tarjeta-header">
+                    <h3>Dolor reportado</h3>
+                </div>
+                <div class="valor-metrica grande" id="dolor-max-val">8</div>
+                <p class="subtexto-metrica">Máximo de la sesión (de 10)</p>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 2: DATOS DEL PACIENTE -->
+        <section class="tarjeta-seccion">
+            <div class="seccion-header">
+                <h2>Datos del Paciente</h2>
+                <span class="badge-paciente-resumen" id="badge-paciente-resumen">Maximiliano Vargas - 21.991.523-3 - 20 años</span>
+            </div>
+
+            <form id="form-paciente" class="formulario-paciente">
+                <div class="fila-inputs col-3">
+                    <div class="campo">
+                        <label>Nombre completo</label>
+                        <input type="text" id="nombre" value="Maximiliano Vargas" required>
                     </div>
-                    <div class="valor-sensor" id="ecg-val">--</div>
-                    <p class="descripcion-sensor">Frecuencia / Actividad cardíaca</p>
+                    <div class="campo">
+                        <label>RUT</label>
+                        <input type="text" id="rut" value="21.991.523-3" required>
+                    </div>
+                    <div class="campo">
+                        <label>Fecha de nacimiento (edad)</label>
+                        <input type="text" id="edad-fecha" placeholder="dd / mm / aaaa (20 años)" value="15 / 04 / 2004 (20 años)">
+                    </div>
                 </div>
 
-                <div class="tarjeta-sensor emg">
-                    <div class="encabezado-sensor">
-                        <h3>EMG (Electromiografía)</h3>
-                        <span class="unidad">mV</span>
+                <div class="fila-inputs col-3">
+                    <div class="campo">
+                        <label>Teléfono</label>
+                        <input type="tel" id="telefono" value="958558253">
                     </div>
-                    <div class="valor-sensor" id="emg-val">--</div>
-                    <p class="descripcion-sensor">Actividad muscular</p>
+                    <div class="campo">
+                        <label>Correo</label>
+                        <input type="email" id="correo" value="maxvarga@umag.cl">
+                    </div>
+                    <div class="campo">
+                        <label>Grupo sanguíneo</label>
+                        <input type="text" id="grupo-sanguineo" value="O+">
+                    </div>
                 </div>
-            </section>
 
-        </div>
+                <!-- SALUD -->
+                <div class="campo mar-v">
+                    <label>Sistema de salud</label>
+                    <div class="selector-pills" id="selector-salud">
+                        <button type="button" class="pill activa" data-salud="Fonasa">Fonasa</button>
+                        <button type="button" class="pill" data-salud="Isapre">Isapre</button>
+                        <button type="button" class="pill" data-salud="Particular">Particular</button>
+                        <button type="button" class="pill" data-salud="FF.AA.">FF.AA.</button>
+                    </div>
+                </div>
 
-        <!--  seccion autoevaluacion del dolor -->
-        <div id="seccion-autoevaluacion" class="vista-seccion oculto">
-            
-            <section class="tarjeta autoevaluacion-card">
-                <h2>Registro de Autoevaluación de Dolor</h2>
-                
-                <form id="formulario-dolor">
-                    <div class="fila-formulario">
-                        <div class="grupo-formulario">
-                            <label for="fecha-hora-dolor">Fecha y Hora del Episodio:</label>
-                            <input type="datetime-local" id="fecha-hora-dolor" required>
-                        </div>
+                <div class="fila-inputs col-2">
+                    <div class="campo">
+                        <label>Alergias (medicamentos, alimentos, otros)</label>
+                        <input type="text" id="alergias" placeholder="Indique a qué">
+                    </div>
+                    <div class="campo">
+                        <label>Enfermedad crónica</label>
+                        <input type="text" id="enfermedad" placeholder="Cuál">
+                    </div>
+                </div>
 
-                        <div class="grupo-formulario">
-                            <label for="nivel-dolor">Intensidad del Dolor: <strong id="valor-dolor-display">5</strong> / 10</label>
-                            <input type="range" id="nivel-dolor" min="1" max="10" value="5" step="1">
-                            <div class="escala-dolor">
-                                <span>1 (Leve)</span>
-                                <span>5 (Moderado)</span>
-                                <span>10 (Insoportable)</span>
-                            </div>
-                        </div>
+                <div class="fila-inputs col-2">
+                    <div class="campo">
+                        <label>Lesiones o cirugías previas</label>
+                        <input type="text" id="lesiones" placeholder="Indique cuáles">
+                    </div>
+                    <div class="campo">
+                        <label>Medicamentos y horario</label>
+                        <input type="text" id="medicamentos" placeholder="Cuál y cuándo">
+                    </div>
+                </div>
+
+                <div class="campo">
+                    <label>Motivo de consulta y observaciones</label>
+                    <textarea id="motivo" rows="2" placeholder="Describa brevemente el motivo de la sesión"></textarea>
+                </div>
+
+                <button type="submit" class="btn-gris-ancho">Editar Ficha del Paciente</button>
+            </form>
+        </section>
+
+        <!-- SECCIÓN 3: REGISTRO DE DOLOR E INTERACCIÓN MANIQUÍ -->
+        <section class="tarjeta-seccion">
+            <div class="seccion-header">
+                <h2>Registro de Dolor</h2>
+                <span class="badge-subtit" id="zonas-resumen-badge">4 zonas marcadas · máx. 7/10</span>
+            </div>
+
+            <!-- TOGGLE TIEMPO -->
+            <div class="toggle-tiempo">
+                <button type="button" class="btn-toggle activo" id="btn-tipo-ahora">Le duele ahora</button>
+                <button type="button" class="btn-toggle" id="btn-tipo-antes">Le dolió antes</button>
+            </div>
+
+            <!-- ESCALA 1 A 10 -->
+            <div class="contenedor-escala-dolor">
+                <label>Intensidad del dolor (1 a 10)</label>
+                <div class="barra-niveles-dolor" id="barra-escala">
+                    <button class="btn-nivel niv-1" data-val="1">1</button>
+                    <button class="btn-nivel niv-2" data-val="2">2</button>
+                    <button class="btn-nivel niv-3" data-val="3">3</button>
+                    <button class="btn-nivel niv-4" data-val="4">4</button>
+                    <button class="btn-nivel niv-5" data-val="5">5</button>
+                    <button class="btn-nivel niv-6" data-val="6">6</button>
+                    <button class="btn-nivel niv-7 seleccionado" data-val="7">7</button>
+                    <button class="btn-nivel niv-8" data-val="8">8</button>
+                    <button class="btn-nivel niv-9" data-val="9">9</button>
+                    <button class="btn-nivel niv-10" data-val="10">10</button>
+                </div>
+                <div class="leyenda-escala">
+                    <span>Sin dolor</span>
+                    <span>Leve</span>
+                    <span>Moderado</span>
+                    <span>Intenso</span>
+                    <span>Dolor máximo</span>
+                </div>
+            </div>
+
+            <!-- MANIQUÍ ANATÓMICO Y PANEL DERECHO -->
+            <div class="grid-maniqui-panel">
+                <!-- FIGURAS ANATÓMICAS SVG -->
+                <div class="area-maniquies">
+                    <div class="vista-cuerpo">
+                        <svg class="svg-maniqui" viewBox="0 0 160 320" id="maniqui-frontal">
+                            <!-- Cabeza / Cuello -->
+                            <ellipse cx="80" cy="30" rx="18" ry="22" class="zona-musculo" data-zona="Cabeza / Cuello" />
+                            <!-- Torso / Pecho -->
+                            <ellipse cx="65" cy="85" rx="18" ry="16" class="zona-musculo" data-zona="Pecho izq." />
+                            <ellipse cx="95" cy="85" rx="18" ry="16" class="zona-musculo" data-zona="Pecho der." />
+                            <!-- Abdomen -->
+                            <ellipse cx="80" cy="130" rx="22" ry="20" class="zona-musculo" data-zona="Abdomen" />
+                            <!-- Hombros -->
+                            <ellipse cx="38" cy="72" rx="12" ry="15" class="zona-musculo" data-zona="Hombro derecho" />
+                            <ellipse cx="122" cy="72" rx="12" ry="15" class="zona-musculo" data-zona="Hombro izquierdo" />
+                            <!-- Brazos -->
+                            <ellipse cx="28" cy="115" rx="9" ry="22" class="zona-musculo" data-zona="Brazo derecho" />
+                            <ellipse cx="132" cy="115" rx="9" ry="22" class="zona-musculo" data-zona="Brazo izquierdo" />
+                            <!-- Muslos -->
+                            <ellipse cx="62" cy="210" rx="14" ry="38" class="zona-musculo" data-zona="Cuádriceps izquierdo" />
+                            <ellipse cx="98" cy="210" rx="14" ry="38" class="zona-musculo" data-zona="Cuádriceps derecho" />
+                        </svg>
+                        <span>Vista frontal</span>
                     </div>
 
-                    <div class="grupo-formulario">
-                        <label for="nota-dolor">Ubicación / Detalles del dolor (Opcional):</label>
-                        <input type="text" id="nota-dolor" placeholder="Ej: Molestia lumbar al estar sentado">
+                    <div class="vista-cuerpo">
+                        <svg class="svg-maniqui" viewBox="0 0 160 320" id="maniqui-posterior">
+                            <!-- Cabeza posterior -->
+                            <ellipse cx="80" cy="30" rx="18" ry="22" class="zona-musculo" data-zona="Nuca / Cuello posterior" />
+                            <!-- Espalda Alta -->
+                            <ellipse cx="65" cy="85" rx="18" ry="16" class="zona-musculo" data-zona="Espalda alta izquierdo" />
+                            <ellipse cx="95" cy="85" rx="18" ry="16" class="zona-musculo" data-zona="Espalda alta derecho" />
+                            <!-- Lumbar / Espalda Baja -->
+                            <ellipse cx="80" cy="130" rx="22" ry="18" class="zona-musculo" data-zona="Lumbar" />
+                            <!-- Isquiotibiales -->
+                            <ellipse cx="62" cy="210" rx="14" ry="38" class="zona-musculo" data-zona="Isquiotibiales izquierdo" />
+                            <ellipse cx="98" cy="210" rx="14" ry="38" class="zona-musculo" data-zona="Isquiotibiales derecho" />
+                        </svg>
+                        <span>Vista posterior</span>
                     </div>
+                </div>
 
-                    <button type="submit" id="btn-registrar-dolor">Registrar Evento de Dolor</button>
-                </form>
-
-                <div class="historial-dolor">
-                    <h3>Historial de Registros de Dolor</h3>
-                    <ul id="lista-dolor" class="lista-registros">
+                <!-- LISTA DE ZONAS Y BOTÓN -->
+                <div class="panel-zonas-registradas">
+                    <h4>Zonas marcadas</h4>
+                    <ul class="lista-zonas-activas" id="lista-zonas-activas">
+                        <!-- Generado dinámicamente -->
                     </ul>
-                </div>
-            </section>
 
-        </div>
+                    <p class="instruccion-click">Toque un músculo del maniquí para marcarlo con la intensidad seleccionada.</p>
+
+                    <button type="button" class="btn-verde-principal" id="btn-guardar-historial">+ Guardar registro en el historial</button>
+                    <button type="button" class="btn-outline-limpiar" id="btn-limpiar-maniqui">Limpiar maniquí y marcar nuevo dolor</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 4: HISTORIAL DE DOLOR Y GRÁFICO -->
+        <section class="tarjeta-seccion">
+            <div class="seccion-header">
+                <h2>Historial de Dolor</h2>
+                <span class="badge-subtit" id="resumen-sesion-badge">4 registros · máx. 8/10 · sesión en curso 00:24:10</span>
+            </div>
+            <p class="nota-historial">Cada registro guarda zonas, intensidad y lecturas del sensor. La sesión sigue abierta mientras se agregan más.</p>
+
+            <!-- TABLA DE HISTORIAL -->
+            <div class="contenedor-tabla">
+                <table class="tabla-historial">
+                    <thead>
+                        <tr>
+                            <th>Hora</th>
+                            <th>Zonas</th>
+                            <th>Tipo</th>
+                            <th>Dolor</th>
+                            <th>ECG (mV)</th>
+                            <th>EMG (mV)</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbody-historial">
+                        <!-- Filas dinámicas -->
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- GRÁFICO DE EVOLUCIÓN -->
+            <div class="grid-grafico-resumen">
+                <div class="box-grafico">
+                    <h4>Evolución del dolor máximo</h4>
+                    <canvas id="grafico-evolucion" height="100"></canvas>
+                </div>
+                <div class="box-metricas-resumen">
+                    <p><strong><span id="cant-registros">4</span> registros guardados</strong></p>
+                    <p>Dolor máximo: <strong id="txt-dolor-max">8/10</strong> <span id="txt-hora-max">(00:16)</span></p>
+                    <p>Zona más frecuente: <strong id="txt-zona-frecuente">Lumbar</strong></p>
+                </div>
+            </div>
+
+            <!-- ACCIONES DE SESIÓN -->
+            <div class="acciones-sesion-footer">
+                <button class="btn-azul-full" id="btn-finalizar-sesion">Finalizar y guardar sesión</button>
+                <button class="btn-outline-full" id="btn-ver-anteriores">Ver sesiones anteriores</button>
+            </div>
+        </section>
 
     </main>
 
